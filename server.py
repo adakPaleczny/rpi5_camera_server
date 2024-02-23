@@ -6,9 +6,7 @@ from camera_recognition.camera_vision import VisionCamera  # Ensure this import 
 app = Flask(__name__)
 pi_camera = VisionCamera()  # Ensure the camera is initialized correctly here
 
-USE_MODEL = False
 app.secret_key = '692137_papierz'  # Set to a random string
-
 
 @app.route('/', methods=["GET","POST"])
 def index():
@@ -30,7 +28,7 @@ def index():
     return render_template('index.html')
 
 def gen(pi_cam):
-    """Video streaming generator function."""
+    # """Video streaming generator function."""
     while True:
         success, image = pi_cam.camera.read()
         if not success:
@@ -46,7 +44,7 @@ def gen(pi_cam):
 
 @app.route('/video')
 def video():
-    """Video streaming route. Put this in the src attribute of an img tag."""
+    # """Video streaming route. Put this in the src attribute of an img tag."""
     if not session.get('is_authorized', False):
         return redirect("/")
 
